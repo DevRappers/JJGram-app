@@ -13,6 +13,7 @@ const AuthNavigation = createStackNavigator(
 		Confirm
 	},
 	{
+		// 헤더 없애기
 		headerMode: 'none'
 	}
 );
