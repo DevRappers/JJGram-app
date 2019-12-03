@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import { Text, View, AsyncStorage, TouchableOpacity } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { persistCache } from 'apollo-cache-persist';
 import ApolloClient from 'apollo-boost';
@@ -11,6 +11,8 @@ import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from 'react-apollo-hooks';
 import apolloClientOptions from './apollo';
 import styles from './styles';
+import NavController from './components/NavController';
+import { AuthProvider } from './AuthContext';
 
 export default function App() {
 	// 로딩관련, client관련, 로그인관련 state
@@ -39,11 +41,8 @@ export default function App() {
 				cache,
 				...apolloClientOptions
 			});
-
-			// 이전에 로그인되었었는지 상태를 확인함
 			const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
-			// AsyncStorage에 string형태로 저장되기 때문에 string으로 비교해줌
-			if (isLoggedIn === null || isLoggedIn === 'false') {
+			if (!isLoggedIn || isLoggedIn === 'false') {
 				setIsLoggedIn(false);
 			} else {
 				setIsLoggedIn(true);
@@ -61,41 +60,13 @@ export default function App() {
 		preLoad();
 	}, []);
 
-	// 로그인 함수
-	const logUserIn = async () => {
-		try {
-			await AsyncStorage.setItem('isLoggedIn', 'true');
-			setIsLoggedIn(true);
-		} catch (e) {
-			console.log(e);
-		}
-	};
-
-	// 로그아웃 함수
-	const logUserOut = async () => {
-		try {
-			await AsyncStorage.setItem('isLoggedIn', 'false');
-			setIsLoggedIn(false);
-		} catch (e) {
-			console.log(e);
-		}
-	};
-
 	// 로딩이 완료되고 client가 있으며 로그인상태가 null이 아닐경우 화면을 보여주고 그렇지 않을 경우 로딩창 출력
 	return loaded && client && isLoggedIn !== null ? (
 		<ApolloProvider client={client}>
 			<ThemeProvider theme={styles}>
-				<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-					{isLoggedIn === true ? (
-						<TouchableOpacity onPress={logUserOut}>
-							<Text>Log Out</Text>
-						</TouchableOpacity>
-					) : (
-						<TouchableOpacity onPress={logUserIn}>
-							<Text>Log In</Text>
-						</TouchableOpacity>
-					)}
-				</View>
+				<AuthProvider isLoggedIn={isLoggedIn}>
+					<NavController />
+				</AuthProvider>
 			</ThemeProvider>
 		</ApolloProvider>
 	) : (
