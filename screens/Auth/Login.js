@@ -38,10 +38,10 @@ export default ({ navigation }) => {
 
 			if (requestSecret) {
 				Alert.alert('이메일로 전송된 시크릿코드를 확인해 주세요.');
-				navigation.navigate('Confirm');
+				navigation.navigate('Confirm', { email: value });
 			} else {
 				Alert.alert('가입되지 않은 이메일주소입니다.');
-				navigation.navigate('Signup');
+				navigation.navigate('Signup', { email: value });
 			}
 		} catch (e) {
 			console.log(e);

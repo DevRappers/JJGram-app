@@ -6,6 +6,6 @@ import MainNavigation from '../navigation/MainNavigation';
 
 export default () => {
 	// 컨텍스트함수를 사용
-	const isLoggedIn = false;
+	const isLoggedIn = useIsLoggedIn();
 	return <View style={{ flex: '1' }}>{isLoggedIn ? <MainNavigation /> : <AuthNavigation />}</View>;
 };
