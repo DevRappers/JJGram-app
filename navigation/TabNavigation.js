@@ -8,6 +8,7 @@ import Search from '../screens/Tabs/Search';
 import { createStackNavigator } from 'react-navigation-stack';
 import MessagesLink from '../components/MessagesLink';
 import NavIcon from '../components/NavIcon';
+import { stackStyles } from './config';
 
 // 헤더를 만들어주기 위한 함수로 tabnavigation의 있는 정보가 들어오면 스택네비게이션으로 반환해줌
 // tab네비게이션을 스택네비게이션으로 만들어주는 과정
@@ -17,7 +18,7 @@ const stackFactory = (initialRoute, customConfig) =>
 			screen: initialRoute,
 			navigationOptions: {
 				...customConfig,
-				headerStyle: { backgroundColor: '#EFEEEF' }
+				headerStyle: { ...stackStyles }
 			}
 		}
 	});
@@ -91,8 +92,8 @@ export default (TabNavigation = createBottomTabNavigator(
 	{
 		tabBarOptions: {
 			showLabel: false,
-			tabStyle: {
-				backgroundColor: '#EFEEEF'
+			style: {
+				backgroundColor: '#FAFAFA'
 			}
 		}
 	}
