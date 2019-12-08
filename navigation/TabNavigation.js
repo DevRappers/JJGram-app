@@ -37,9 +37,7 @@ export default (TabNavigation = createBottomTabNavigator(
 			}
 		},
 		Search: {
-			screen: stackFactory(Search, {
-				title: 'Search'
-			}),
+			screen: stackFactory(Search),
 			navigationOptions: {
 				tabBarIcon: ({ focused }) => (
 					<NavIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'} />
@@ -94,6 +92,7 @@ export default (TabNavigation = createBottomTabNavigator(
 		}
 	},
 	{
+		initialRouteName: 'Search',
 		tabBarOptions: {
 			showLabel: false,
 			style: {
