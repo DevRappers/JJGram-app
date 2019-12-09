@@ -11,6 +11,7 @@ import MessagesLink from '../components/MessagesLink';
 import NavIcon from '../components/NavIcon';
 import { stackStyles } from './config';
 import styles from '../styles';
+import UserDetail from '../screens/UserDetail';
 
 // 헤더를 만들어주기 위한 함수로 tabnavigation의 있는 정보가 들어오면 스택네비게이션으로 반환해줌
 // tab네비게이션을 스택네비게이션으로 만들어주는 과정
@@ -26,13 +27,20 @@ const stackFactory = (initialRoute, customConfig) =>
 			Detail: {
 				screen: Detail,
 				navigationOptions: {
-					headerTintColor: styles.blackColor,
 					title: 'Photo'
+				}
+			},
+			UserDetail: {
+				screen: UserDetail,
+				navigationOptions: {
+					title: 'User'
 				}
 			}
 		},
 		{
 			defaultNavigationOptions: {
+				headerBackTitle: null,
+				headerTintColor: styles.blackColor,
 				headerStyle: { ...stackStyles }
 			}
 		}
