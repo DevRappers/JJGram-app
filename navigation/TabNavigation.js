@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from '../screens/Tabs/Home';
 import Notifications from '../screens/Tabs/Notifications';
 import Profile from '../screens/Tabs/Profile';
+import Detail from '../screens/Detail';
 import Search from '../screens/Tabs/Search';
 import { createStackNavigator } from 'react-navigation-stack';
 import MessagesLink from '../components/MessagesLink';
@@ -14,13 +15,14 @@ import { stackStyles } from './config';
 // tab네비게이션을 스택네비게이션으로 만들어주는 과정
 const stackFactory = (initialRoute, customConfig) =>
 	createStackNavigator({
-		InitialRout: {
+		InitialRoute: {
 			screen: initialRoute,
 			navigationOptions: {
 				...customConfig,
 				headerStyle: { ...stackStyles }
 			}
-		}
+		},
+		Detail
 	});
 
 export default (TabNavigation = createBottomTabNavigator(

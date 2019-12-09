@@ -43,7 +43,6 @@ export default class extends React.Component {
 	};
 
 	onSubmit = () => {
-		console.log('Submit');
 		this.setState({ shouldFetch: true });
 	};
 	render() {
